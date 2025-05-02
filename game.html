@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <script>
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+        function getComputerChoice(){
+            let num = getRandomInt(3);
+            if (num===0){
+                return "rock";
+            }
+            else if (num===1){
+                return "paper";
+            }
+            else{
+                return "scissor";
+            }
+
+        }
+        function getHumanChoice(){
+            let choice = prompt("Enter your choice")
+            return choice.toLowerCase()
+        }
+        let humanscore = 0;
+        let computerscore = 0;
+        function playRound(computer,human){
+            if (computer ==="rock" && human==="scissor") {
+                computerscore+=1;
+                console.log("Computer Wins");
+            }
+            else if (computer==="rock" && human==="paper") {
+                humanscore +=1;
+                console.log("Human Wins");
+            }
+            else if (computer ==="scissor" && human==="rock"){
+                humanscore+=1;
+                console.log("Human Wins");
+            }
+            else if (computer ==="paper" && human==="rock"){
+                computerscore+=1;
+                console.log("Computer Wins");
+            }
+            else if (computer ==="paper" && human==="scissor"){
+                humanscore+=1;
+                console.log("Human Wins");
+            }
+            else if (computer ==="scissor" && human==="paper"){
+                computerscore+=1;
+                console.log("Computer Wins");
+            }
+            else if (computer==="paper" && human==="paper"){
+                console.log("It is a draw.");
+            }
+            else if (computer==="rock" && human==="rock"){
+                console.log("It is a draw.");
+            }
+            else if (computer==="scissor" && human==="scissor"){
+                console.log("It is a draw");
+            }
+        }    
+
+        function playgame(){
+            for (let i=0;i<5;i++){
+                let compchoice = getComputerChoice();
+                let humchoice = getHumanChoice();
+                playRound(compchoice,humchoice);
+            }
+            if (humanscore>computerscore){
+                console.log("Human Wins the game");
+            }
+            else if (computerscore>humanscore){
+                console.log("Computer Wins the game");
+            }
+        }
+        playgame()
+            
+        
+
+    </script>
+</body>
+</html>
