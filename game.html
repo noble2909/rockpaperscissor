@@ -6,6 +6,13 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
+    <button id="rock">Rock</button>
+    <button id="scissor">Scissor</button>
+    <button id="paper">Paper</button>
+    <div id="result"></div>
+    <div id="score"></div>
+    <div id="status"></div>
+
     <script>
         function getRandomInt(max) {
             return Math.floor(Math.random() * max);
@@ -29,57 +36,101 @@
         }
         let humanscore = 0;
         let computerscore = 0;
+        let clicks = 0;
+
+
+        const result = document.querySelector("#result");
+        const score = document.querySelector("#score");
+        const status = document.querySelector("#status");
+        const rock = document.querySelector("#rock");
+        const paper = document.querySelector("#paper");
+        const scissor = document.querySelector("#scissor");
+
+        function click(choice){
+        
+            if (clicks >= 5) return;
+            let compchoice = getComputerChoice();
+            playRound(compchoice,choice);
+            clicks++;
+            if (clicks===5){
+                if (computerscore>humanscore){
+                    status.textContent = "Game Over, Computer Wins"
+                    disableButtons();
+                }
+                else if (humanscore>computerscore){
+                    status.textContent = "Gamer Over, Human Wins"
+                    disableButtons();
+                }
+
+            }
+        }
+
+
+        function disableButtons(){
+            rock.disabled = true;
+            paper.disabled = true;
+            scissor.disabled = true;
+        }
+
+
         function playRound(computer,human){
             if (computer ==="rock" && human==="scissor") {
                 computerscore+=1;
-                console.log("Computer Wins");
+                result.textContent = "Computer Wins";
+                score.textContent = `Computer = ${computerscore}
+                Human = ${humanscore}`;
             }
             else if (computer==="rock" && human==="paper") {
                 humanscore +=1;
-                console.log("Human Wins");
+                result.textContent = "Human Wins";
+                score.textContent = `Computer = ${computerscore}
+                Human = ${humanscore}`;
             }
             else if (computer ==="scissor" && human==="rock"){
                 humanscore+=1;
-                console.log("Human Wins");
+                result.textContent = "Human Wins";
+                score.textContent = `Computer = ${computerscore}
+                Human = ${humanscore}`;
             }
             else if (computer ==="paper" && human==="rock"){
                 computerscore+=1;
-                console.log("Computer Wins");
+                result.textContent = "Computer Wins";
+                score.textContent = `Computer = ${computerscore}
+                Human = ${humanscore}`;
             }
             else if (computer ==="paper" && human==="scissor"){
                 humanscore+=1;
-                console.log("Human Wins");
+                result.textContent = "Human Wins";
+                score.textContent = `Computer = ${computerscore}
+                Human = ${humanscore}`;
             }
             else if (computer ==="scissor" && human==="paper"){
                 computerscore+=1;
-                console.log("Computer Wins");
+                result.textContent = "Computer Wins";
+                score.textContent = `Computer = ${computerscore}
+                Human = ${humanscore}`;
             }
             else if (computer==="paper" && human==="paper"){
-                console.log("It is a draw.");
+                result.textContent = "It is a draw.";
+                score.textContent = `Computer = ${computerscore}
+                Human = ${humanscore}`;
             }
             else if (computer==="rock" && human==="rock"){
-                console.log("It is a draw.");
+                result.textContent = "It is a draw.";
+                score.textContent = `Computer = ${computerscore}
+                Human = ${humanscore}`;
             }
             else if (computer==="scissor" && human==="scissor"){
-                console.log("It is a draw");
+                result.textContent = "It is a draw.";
+                score.textContent = `Computer = ${computerscore}
+                Human = ${humanscore}`;
             }
         }    
+        
+        rock.addEventListener("click", () => click("rock"));
+        paper.addEventListener("click", () => click("paper"));
+        scissor.addEventListener("click", () => click("scissor"))
 
-        function playgame(){
-            for (let i=0;i<5;i++){
-                let compchoice = getComputerChoice();
-                let humchoice = getHumanChoice();
-                playRound(compchoice,humchoice);
-            }
-            if (humanscore>computerscore){
-                console.log("Human Wins the game");
-            }
-            else if (computerscore>humanscore){
-                console.log("Computer Wins the game");
-            }
-        }
-        playgame()
-            
         
 
     </script>
